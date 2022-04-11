@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.jpa.test.comment.Comment;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class PostService {
 
@@ -22,6 +25,7 @@ public class PostService {
 	 }
 	
 	public Post createPost(Post spost) {
+		log.info("insdie create");
 		Post post = new Post();
 		post.setTitle(spost.getTitle());
 		post.setDescription(spost.getDescription());
@@ -36,6 +40,7 @@ public class PostService {
 		comments.add(c);
 		}
 		post.setComments(comments);
+		log.info("end create");
 	    return postRepository.save(post);
 	 }
 }
