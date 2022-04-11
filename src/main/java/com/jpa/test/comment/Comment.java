@@ -3,6 +3,7 @@ package com.jpa.test.comment;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,8 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import com.jpa.test.post.Post;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,11 +31,10 @@ public class Comment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long commentid;
 	private String content;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
-	@ManyToOne(fetch = FetchType.LAZY,optional = true)
-    @JoinColumn(name = "post_id", nullable = true)
-	private Post post;
 }

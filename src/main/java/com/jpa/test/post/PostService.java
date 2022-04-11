@@ -21,18 +21,20 @@ public class PostService {
 	    return postRepository.findAll();
 	 }
 	
-	public Post createPost(Post post) {
-		//Post post = new Post();
-		post.setTitle(post.getTitle());
-		post.setDescription(post.getDescription());
-		post.setCreatedAt(post.getCreatedAt());
-		post.setUpdatedAt(post.getUpdatedAt());
+	public Post createPost(Post spost) {
+		Post post = new Post();
+		post.setTitle(spost.getTitle());
+		post.setDescription(spost.getDescription());
+		post.setCreatedAt(spost.getCreatedAt());
+		post.setUpdatedAt(spost.getUpdatedAt());
 		Comment comment = new Comment();
-		comment.setContent(post.getComments().get(0).getContent());
-		comment.setCreatedAt(post.getComments().get(0).getCreatedAt());
-		comment.setUpdatedAt(post.getComments().get(0).getUpdatedAt());
 		List<Comment> comments = new ArrayList<Comment>();
-		comments.add(comment);
+		for(Comment c : spost.getComments()) {
+		comment.setContent(c.getContent());
+		comment.setCreatedAt(c.getCreatedAt());
+		comment.setUpdatedAt(c.getUpdatedAt());
+		comments.add(c);
+		}
 		post.setComments(comments);
 	    return postRepository.save(post);
 	 }
